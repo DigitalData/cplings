@@ -4,16 +4,15 @@
 set(FUNCTIONS_EXERCISES_PATH ".")
 set(UNIT_TESTING_LIBRARY Catch2)
 set(EXERCISES
-  classes1
-  classes2
-  classes3
-  classes4
+    classes4
+    classes3
+    classes2
+    classes1
 )
 
 foreach(_exercise ${EXERCISES})
   add_executable(${_exercise} ${FUNCTIONS_EXERCISES_PATH}/${_exercise}.cpp)
   target_include_directories(${_exercise} PRIVATE include)
-
   # link dependencies
   target_link_libraries(${_exercise} ${MYPROJECT_LIBRARIES} ${UNIT_TESTING_LIBRARY} cplings)
   add_custom_command(
@@ -22,6 +21,7 @@ foreach(_exercise ${EXERCISES})
     DEPENDS ${_exercise}
     COMMAND ${_exercise}
   )
+
 endforeach()
 
 ##################################################################################################
@@ -31,4 +31,5 @@ endforeach()
 ##################################################################################################
 # Don't forget its:  add_test(<test name (globally unique) > <exe name> <argument1> <argument2>
 ##################################################################################################
+
 enable_testing()

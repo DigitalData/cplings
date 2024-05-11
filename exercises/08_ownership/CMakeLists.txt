@@ -5,18 +5,17 @@
 set(FUNCTIONS_EXERCISES_PATH ".")
 set(UNIT_TESTING_LIBRARY Catch2)
 set(EXERCISES
-  ownership1
-  ownership2
-  ownership3
-  ownership4
-  ownership5
-  ownership6
+    ownership6
+    ownership5
+    ownership4
+    ownership3
+    ownership2
+    ownership1
 )
 
 foreach(_exercise ${EXERCISES})
   add_executable(${_exercise} ${FUNCTIONS_EXERCISES_PATH}/${_exercise}.cpp)
   target_include_directories(${_exercise} PRIVATE include)
-
   # link dependencies
   target_link_libraries(${_exercise} ${MYPROJECT_LIBRARIES} ${UNIT_TESTING_LIBRARY} cplings)
   add_custom_command(
@@ -25,6 +24,7 @@ foreach(_exercise ${EXERCISES})
     DEPENDS ${_exercise}
     COMMAND ${_exercise}
   )
+
 endforeach()
 
 ##################################################################################################
@@ -34,4 +34,7 @@ endforeach()
 ##################################################################################################
 # Don't forget its:  add_test(<test name (globally unique) > <exe name> <argument1> <argument2>
 ##################################################################################################
+
 enable_testing()
+
+
