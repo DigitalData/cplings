@@ -10,7 +10,7 @@ bool is_even(int num) {
     return num % 2 == 0;
 }
 
-void sale_price(int price){
+int sale_price(int price){
     if (is_even(price)) {
         return price - 10;
     }
