@@ -34,7 +34,7 @@ struct is_pointer<T*> : true_type {};
 template<typename C>
 void show(C data) {
     // TODO : Delete test and content of if condition
-    if constexpr ( ...? /* check if the type is a pointer */) {
+    if constexpr (is_pointer<C>::value) {
         std::cout << *data << "\n";
     }
     else {
