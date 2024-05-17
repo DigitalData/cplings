@@ -38,7 +38,10 @@ public:
         resource = new ExpensiveResource(n);
     }
     // Fix: I need a destructor that releases the resource
-    ~
+    ~Holder() {
+        std::cout << "Closing Holder\n";
+        resource->~ExpensiveResource();
+    }
 };
 
 
