@@ -12,27 +12,27 @@
 // Use two generic types to accept both deque and vector.
 // Use the keyword auto for the generic int returned by the function max
 
-template<typename ?>  // TODO : delete all references to typename and replace all int with int
+template<typename T>  // TODO : delete all references to typename and replace all int with int
 class Animal {
 private:
-    ? age_;
+    T age_;
 public:
-    Animal(int years) : age_(years) {};
-    auto age() const { return age_; };
+    Animal(T years) : age_(years) {};
+    T age() const { return age_; };
 };
 
-template<typename ?> 
-class Cat : public Animal<?> {
+template<typename T> 
+class Cat : public Animal<T> {
 public:
-    Cat(int years) : Animal<?>(years) {};
+    Cat(T years) : Animal<T>(years) {};
 };
 
 constexpr int    INTEGER_FOUR_YEARS = 4;
 constexpr double ONE_YEAR_AND_HALF = 1.5;
 
 std::pair<double, int>  test_templates4() {
-    Cat blue(INTEGER_FOUR_YEARS);
-    Cat sylvester(ONE_YEAR_AND_HALF);
+    Cat<int> blue(INTEGER_FOUR_YEARS);
+    Cat<double> sylvester(ONE_YEAR_AND_HALF);
     
     return { sylvester.age(), blue.age() };
 }
