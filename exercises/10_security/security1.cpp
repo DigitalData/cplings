@@ -27,8 +27,8 @@ public:
     }
 };
 
-const char * convert_to_C_style_string(MediaPlayer & p, int index){
-    return p.get_song_name(index).c_str();
+std::string convert_to_C_style_string(MediaPlayer & p, int index){
+    return p.get_song_name(index);
 }
 
 #include <catch2/catch.hpp>
@@ -38,6 +38,6 @@ TEST_CASE("test_security1_0") {
     p.set_song("Old MacDonald had a farm", 0);
     p.set_song("When the circus comes to town", 1);
     REQUIRE(p.get_song_name(0) == "Old MacDonald had a farm");
-    const char * second_song = convert_to_C_style_string(p, 0);
+    std::string second_song = convert_to_C_style_string(p, 0);
     REQUIRE(second_song == "Old MacDonald had a farm");
 }
