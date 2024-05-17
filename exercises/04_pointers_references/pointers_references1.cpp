@@ -11,12 +11,12 @@
 // Fix the syntax mistakes to return the correct pointer values
 
 int* my_pointer_value_swap(int* old_data) {
-    int new_data = old_data; // Fix: new_data should be a pointer
+    int* new_data = old_data; // Fix: new_data should be a pointer
     return new_data;
 }
 
 void my_pointer_content(int * const value, int increment) { // the address of pointed value is const 
-    value += increment; 
+    *value += increment; 
 }
 
 // Test cases
