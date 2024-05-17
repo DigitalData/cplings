@@ -48,11 +48,12 @@ public:
         resource = new ExpensiveResource(n);
     }
     ~Holder() {
+        std::cout << "Holder " << resource->getName() << " being deleted.\n";
         delete resource;
     }
 };
 
-using HolderBox = Holder*; // Note that HolderBox is a pointer to Holder. Modify this definition for using a unique resource
+using HolderBox = std::shared_ptr<Holder>; // Note that HolderBox is a pointer to Holder. Modify this definition for using a unique resource
 
 void push_data(std::vector<HolderBox> & holder_list, HolderBox hold_ptr) {
     holder_list.push_back(std::move(hold_ptr));
@@ -64,11 +65,19 @@ std::vector<HolderBox> test_ownership4() {
     for (size_t i = 0; i < num_elems; i++)
     {
         std::string s = "Hold#" + std::to_string(i);
-        Holder h { s };
+        std::cout << "start " << s << "\n";
+        HolderBox h = HolderBox(new Holder(s));
         // Try to pass unique ownership out of h to holder_list
-        push_data(holder_list, &h);
+        push_data(holder_list, h);
+        std::cout << "end " << s << "\n\n";
     }
+
+    for (size_t i = 0; i < num_elems; i++) {
+        std::cout << "elem " << holder_list[i]->getName() << "\n"; 
+    }
+
     return holder_list;
+    
 }
 
 
