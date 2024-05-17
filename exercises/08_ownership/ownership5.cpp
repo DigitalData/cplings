@@ -31,7 +31,7 @@ std::ostream& operator<< (std::ostream& out, const std::vector<T>& collection) {
 }
 
 
-void fill_vec(std::vector<int> vec) { // Fix: fix type here
+void fill_vec(std::vector<int> * vec) { // Fix: fix type here
     vec->push_back(22);
     vec->push_back(44);
     vec->push_back(66);
@@ -41,7 +41,7 @@ void fill_vec(std::vector<int> vec) { // Fix: fix type here
 std::unique_ptr<std::vector<int>> test_ownership5() {
     std::unique_ptr<std::vector<int>> vec = std::make_unique<std::vector<int>>();
     vec->push_back(11);
-    fill_vec(vec. ...?); // Fix: obtain pointer from vec
+    fill_vec(vec.get());
     vec->push_back(88);
 
     return std::move(vec);
