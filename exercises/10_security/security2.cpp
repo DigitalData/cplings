@@ -28,7 +28,7 @@ public:
     }
 };
 
-const std::string convert_title_to_upper_case(std::shared_ptr<MediaPlayer> p, int index){
+const std::string convert_title_to_upper_case(MediaPlayer *p, int index){
     auto songname = p->get_song_name(index);
     for(auto & c : songname){
         c = std::toupper(c);
@@ -36,7 +36,7 @@ const std::string convert_title_to_upper_case(std::shared_ptr<MediaPlayer> p, in
     return songname;
 }
 
-const std::string convert_title_to_lower_case(std::shared_ptr<MediaPlayer> p, int index){
+const std::string convert_title_to_lower_case(MediaPlayer *p, int index){
     auto songname = p->get_song_name(index);
     for(auto & c : songname){
         c = std::tolower(c);
@@ -45,12 +45,11 @@ const std::string convert_title_to_lower_case(std::shared_ptr<MediaPlayer> p, in
 }
 
 void make_upper_0_lower_1(MediaPlayer &p){
-    auto shared0 = std::shared_ptr<MediaPlayer>(&p);
-    std::string s0_upper = convert_title_to_upper_case(shared0, 0);
+    std::cout << "test4\n";
+    std::string s0_upper = convert_title_to_upper_case(&p, 0);
     std::cout << s0_upper << "\n";
 
-    auto shared1 = std::shared_ptr<MediaPlayer>(&p);
-    std::string s1_lower = convert_title_to_lower_case(shared1, 1);
+    std::string s1_lower = convert_title_to_lower_case(&p, 1);
     std::cout << s1_lower << "\n";
 }
 
@@ -59,7 +58,10 @@ void make_upper_0_lower_1(MediaPlayer &p){
 TEST_CASE("test_security2_0")
 {
     MediaPlayer p;
+    std::cout << "test1\n";
     p.set_song("Old MacDonald had a farm", 0);
+    std::cout << "test2\n";
     p.set_song("When the circus comes to town", 1);
+    std::cout << "test3\n";
     make_upper_0_lower_1(p);
 }
