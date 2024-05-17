@@ -36,28 +36,25 @@ public:
     Shape(const Point & centre = point_zero) : center_(centre) { }
 
     virtual Point center() const  {
-        return point_zero;
+        return center_;
     }
 };
 
 class Circle : public Shape {
 public:
     Circle(const Point& centre = point_zero) : Shape(centre) { } 
-    virtual Point center() const {
-        return Circle::center_;
-    }
 };
 
 std::vector<Point> test_center() {
     const Shape shape;
     const Point point_in{ 1.0, 1.0 };
     const Circle circle(point_in);
-    std::vector<Shape*> shape_collection;
-    shape_collection.push_back(&shape);
-    shape_collection.push_back(circle);  // Fix: Virtual calls work with references and addresses
+    std::vector<Shape *> shape_collection;
+    shape_collection.push_back((Shape*) &shape);
+    shape_collection.push_back((Shape*) &circle);  // Fix: Virtual calls work with references and addresses
 
-    std::vector<Point> center_collection{ shape_collection[0].center(), // Fix: Virtual calls work with references and addresses
-                                                shape_collection[1].center() };
+    std::vector<Point> center_collection{ (*shape_collection[0]).center(), // Fix: Virtual calls work with references and addresses
+                                                (*shape_collection[1]).center() };
     std::cout << "Value :" << center_collection[0] << "\n";
     std::cout << "Value :" << center_collection[1] << "\n";
     return center_collection;
