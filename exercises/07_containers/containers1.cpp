@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 // containers1.cpp
 // Make me compile! Go to the folder hint if you want a hint :)
@@ -11,7 +12,7 @@
 
 
 constexpr int num_elements = 4;
-int my_sequence[num_elements]; // Fix change this type to the appropriate STL container
+std::vector<int> my_sequence = std::vector<int>(num_elements); // Fix change this type to the appropriate STL container
 
 void test_containers1() {
 	for (size_t i = 0; i < num_elements; i++)
