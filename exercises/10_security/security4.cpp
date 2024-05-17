@@ -64,8 +64,10 @@ class MediaPlayer {
     static constexpr size_t default_max_num_songs = 4;
     Song* song_ar;
     MediaPlayer() = delete;
+    int _max_num_songs;
 public:
-    MediaPlayer(const size_t max_num_songs) {
+    MediaPlayer(const size_t max_num_songs = default_max_num_songs): 
+    _max_num_songs(max_num_songs) {
         song_ar = static_cast<Song*>(Song::operator new[](max_num_songs));
         std::cout<<"Created MediaPlayer song array at " << std::hex << song_ar <<"\n";
     }
@@ -73,10 +75,22 @@ public:
         std::cout<<"Deleting MediaPlayer song array at " << std::hex << song_ar <<"\n";
         Song::operator delete[](song_ar);
     }
+
+    bool in_bounds(int index) {
+        if (index < 0 || index >= _max_num_songs) {
+            std::cout << "Index out of bounds.\n";
+            return false;
+        }
+        return true;
+    }
+
     void set_song(std::string name, const unsigned short  index){
         song_ar[index] = std::move(Song(std::move(name)));
     }
-    std::string get_song_name(const unsigned char index) const{
+    std::string get_song_name(int index) {
+        if (!in_bounds(index)){
+            return "";
+        }
         return song_ar[index].name_;
     }
 };
