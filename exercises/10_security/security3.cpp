@@ -19,10 +19,27 @@ class MediaPlayer {
     std::array<Song, max_num_songs> song_ar;
 public:
     MediaPlayer() {} 
+
+    bool in_bounds(int index) {
+        if (index < 0 || index >= max_num_songs) {
+            std::cout << "Index out of bounds.\n";
+            return false;
+        }
+        return true;
+    }
+
     void set_song(std::string name, int index){
+        if (!in_bounds(index)){return;}
         song_ar[index] = Song(name);
     }
-    std::string get_song_name(int index) const{
+    void add_song(std::string name, int index){
+        if (!in_bounds(index)){return;}
+        song_ar[index] = Song(name);
+    }
+    std::string get_song_name(int index){
+        if (!in_bounds(index)){
+            return "";
+        }
         return song_ar[index].name_;
     }
 };
