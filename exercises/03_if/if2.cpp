@@ -14,11 +14,9 @@
 std::string fizz_if_foo(std::string fizzish) {
     if (fizzish == "fizz") {
         return "foo";
-    }
-    // Fix: Make new "else if" and "else" cases to pass the test
+    } 
 
-
-    
+    return "bar";
 }
 
 
@@ -30,5 +28,5 @@ TEST_CASE("foo_for_fizz") {
 }
 
 TEST_CASE("bar_for_fuzz") {
-    REQUIRE(fizz_if_foo("fizz") == "foo");
+    REQUIRE(fizz_if_foo("fuzz") == "bar");
 }
